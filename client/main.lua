@@ -173,7 +173,7 @@ RegisterNetEvent('police:client:SendToJail', function(time)
     isEscorted = false
     ClearPedTasks(PlayerPedId())
     DetachEntity(PlayerPedId(), true, false)
-    TriggerEvent("prison:client:Enter", time)
+    TriggerEvent('rsg-prison:client:Enter', time)
 end)
 
 RegisterNetEvent('police:client:SendPoliceEmergencyAlert', function()
