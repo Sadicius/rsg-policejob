@@ -92,7 +92,7 @@ RegisterNetEvent('police:client:RobPlayer', function()
         local playerPed = GetPlayerPed(player)
         local playerId = GetPlayerServerId(player)
 
-        if IsEntityPlayingAnim(playerPed, 'mech_busted@arrest', 'hands_up_transition', 3) then
+        if IsEntityPlayingAnim(playerPed, "script_proc@robberies@homestead@lonnies_shack@deception", "hands_up_loop", 3) then
             RSGCore.Functions.Progressbar("robbing_player", Lang:t("progressbar.robbing"), math.random(5000, 7000), false, true, {
                 disableMovement = true,
                 disableCarMovement = true,
