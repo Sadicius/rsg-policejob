@@ -244,20 +244,6 @@ RSGCore.Functions.CreateUseableItem("handcuffs", function(source, item)
     end
 end)
 
-RSGCore.Functions.CreateUseableItem("moneybag", function(source, item)
-    local src = source
-    local Player = RSGCore.Functions.GetPlayer(src)
-    if Player.Functions.GetItemByName(item.name) then
-        if item.info and item.info ~= "" then
-            if Player.PlayerData.job.name ~= "police" then
-                if Player.Functions.RemoveItem("moneybag", 1, item.slot) then
-                    Player.Functions.AddMoney("cash", tonumber(item.info.cash), "used-moneybag")
-                end
-            end
-        end
-    end
-end)
-
 RSGCore.Functions.CreateUseableItem("evidence_satchel", function(source, item)
     local src = source
     local Player = RSGCore.Functions.GetPlayer(src)
