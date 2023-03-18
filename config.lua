@@ -63,26 +63,26 @@ Config.Locations = {
 }
 
 Config.AuthorizedVehicles = {
-	-- Grade 0
-	[0] = {
-		["policewagon01x"] = "Police Vagon",
-	},
-	-- Grade 1
-	[1] = {
-		["policewagon01x"] = "Police Vagon",
-	},
-	-- Grade 2
-	[2] = {
-		["policewagon01x"] = "Police Vagon",
-	},
-	-- Grade 3
-	[3] = {
-		["policewagon01x"] = "Police Vagon",
-	},
-	-- Grade 4
-	[4] = {
-		["policewagon01x"] = "Police Vagon",
-	}
+    -- Grade 0
+    [0] = {
+        ["policewagon01x"] = "Police Vagon",
+    },
+    -- Grade 1
+    [1] = {
+        ["policewagon01x"] = "Police Vagon",
+    },
+    -- Grade 2
+    [2] = {
+        ["policewagon01x"] = "Police Vagon",
+    },
+    -- Grade 3
+    [3] = {
+        ["policewagon01x"] = "Police Vagon",
+    },
+    -- Grade 4
+    [4] = {
+        ["policewagon01x"] = "Police Vagon",
+    }
 }
 
 Config.WeaponHashes = {}

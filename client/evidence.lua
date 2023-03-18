@@ -38,16 +38,16 @@ local WhitelistedWeapons = {
 -- Functions
 local function DrawText3D(x, y, z, text)
     coords = vector3(x, y, z)
-	local onScreen, x, y = GetScreenCoordFromWorldCoord(coords.x, coords.y, coords.z)
+    local onScreen, x, y = GetScreenCoordFromWorldCoord(coords.x, coords.y, coords.z)
 
-	if (onScreen) then
-		SetTextScale(0.35, 0.35)
-		SetTextColor(255, 255, 255, 215)
-		SetTextFontForCurrentCommand(4)
-		SetTextDropshadow(0, 0, 0, 255)
-		SetTextCentre(true)
-		DisplayText(CreateVarString(10, 'LITERAL_STRING', text), x, y)
-	end
+    if (onScreen) then
+        SetTextScale(0.35, 0.35)
+        SetTextColor(255, 255, 255, 215)
+        SetTextFontForCurrentCommand(4)
+        SetTextDropshadow(0, 0, 0, 255)
+        SetTextCentre(true)
+        DisplayText(CreateVarString(10, 'LITERAL_STRING', text), x, y)
+    end
 end
 
 local function WhitelistedWeapon(weapon)

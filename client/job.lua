@@ -38,7 +38,7 @@ function TakeOutVehicle(vehicleInfo)
     RSGCore.Functions.SpawnVehicle(vehicleInfo, function(veh)
         SetEntityHeading(veh, coords.w)
         TaskWarpPedIntoVehicle(PlayerPedId(), veh, -1)
-	Citizen.InvokeNative(0x400F9556,veh, Lang:t('info.police_plate')..tostring(math.random(1000, 9999)))
+        Citizen.InvokeNative(0x400F9556,veh, Lang:t('info.police_plate')..tostring(math.random(1000, 9999)))
         SetVehicleEngineOn(veh, true, true)
     end, coords, true)
 end
@@ -77,7 +77,7 @@ end
 
 function CreatePrompts()
     for k,v in pairs(Config.Locations['duty']) do
-        exports['rsg-core']:createPrompt('duty_prompt_' .. k, v, 0xF3830D8E, 'Toggle duty status', {
+        exports['rsg-core']:createPrompt('duty_prompt_' .. k, v, RSGCore.Shared.Keybinds['J'], 'Toggle duty status', {
             type = 'client',
             event = 'rsg-policejob:ToggleDuty',
             args = {},
@@ -85,7 +85,7 @@ function CreatePrompts()
     end
     
     for k, v in pairs(Config.Locations["vehicle"]) do
-        exports['rsg-core']:createPrompt("police:vehicle_"..k, vector3(v.x, v.y, v.z), Config.PromptKey, 'Jobgarage', {
+        exports['rsg-core']:createPrompt("police:vehicle_"..k, vector3(v.x, v.y, v.z), RSGCore.Shared.Keybinds['R'], 'Jobgarage', {
             type = 'client',
             event = 'police:client:promptVehicle',
             args = {k},
@@ -93,7 +93,7 @@ function CreatePrompts()
     end   
 
     for k,v in pairs(Config.Locations['evidence']) do
-        exports['rsg-core']:createPrompt('evidence_prompt_' .. k, v, 0xF3830D8E, 'Open Evidence Stash', {
+        exports['rsg-core']:createPrompt('evidence_prompt_' .. k, v, RSGCore.Shared.Keybinds['J'], 'Open Evidence Stash', {
             type = 'client',
             event = 'police:client:EvidenceStashDrawer',
             args = { k },
@@ -101,7 +101,7 @@ function CreatePrompts()
     end
 
     for k,v in pairs(Config.Locations['stash']) do
-        exports['rsg-core']:createPrompt('stash_prompt_' .. k, v, 0xF3830D8E, 'Open Personal Stash', {
+        exports['rsg-core']:createPrompt('stash_prompt_' .. k, v, RSGCore.Shared.Keybinds['J'], 'Open Personal Stash', {
             type = 'client',
             event = 'police:client:OpenPersonalStash',
             args = {},
@@ -109,7 +109,7 @@ function CreatePrompts()
     end
 
     for k,v in pairs(Config.Locations['armory']) do
-        exports['rsg-core']:createPrompt('armory_prompt_' .. k, v, 0xF3830D8E, 'Open Armory', {
+        exports['rsg-core']:createPrompt('armory_prompt_' .. k, v, RSGCore.Shared.Keybinds['J'], 'Open Armory', {
             type = 'client',
             event = 'police:client:OpenArmory',
             args = {},
@@ -266,26 +266,26 @@ end)
 RegisterNetEvent('police:client:OpenArmory', function()
     RSGCore.Functions.GetPlayerData(function(PlayerData)
         if PlayerData.job.name == "police" then
-			local authorizedItems = {
-				label = Lang:t('menu.pol_armory'),
-				slots = 30,
-				items = {}
-			}
-			local index = 1
-			for _, armoryItem in pairs(Config.Items.items) do
-				for i=1, #armoryItem.authorizedJobGrades do
-					if armoryItem.authorizedJobGrades[i] == PlayerData.job.grade.level then
-						authorizedItems.items[index] = armoryItem
-						authorizedItems.items[index].slot = index
-						index = index + 1
-					end
-				end
-			end
-			SetWeaponSeries()
-			TriggerServerEvent("inventory:server:OpenInventory", "shop", "police", authorizedItems)
+            local authorizedItems = {
+                label = Lang:t('menu.pol_armory'),
+                slots = 30,
+                items = {}
+            }
+            local index = 1
+            for _, armoryItem in pairs(Config.Items.items) do
+                for i=1, #armoryItem.authorizedJobGrades do
+                    if armoryItem.authorizedJobGrades[i] == PlayerData.job.grade.level then
+                        authorizedItems.items[index] = armoryItem
+                        authorizedItems.items[index].slot = index
+                        index = index + 1
+                    end
+                end
+            end
+            SetWeaponSeries()
+            TriggerServerEvent("inventory:server:OpenInventory", "shop", "police", authorizedItems)
         else
-			RSGCore.Functions.Notify('law enforcement only', 'error')
-		end
+            RSGCore.Functions.Notify('law enforcement only', 'error')
+        end
     end)
 end)
 

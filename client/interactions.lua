@@ -37,7 +37,7 @@ RegisterNetEvent('police:client:PutInVehicle', function()
     if isHandcuffed or isEscorted then
         local vehicle = RSGCore.Functions.GetClosestVehicle()
         if DoesEntityExist(vehicle) then
-			for i = GetVehicleMaxNumberOfPassengers(vehicle), 1, -1 do
+            for i = GetVehicleMaxNumberOfPassengers(vehicle), 1, -1 do
                 if IsVehicleSeatFree(vehicle, i) then
                     isEscorted = false
                     TriggerEvent('hospital:client:isEscorted', isEscorted)
@@ -49,7 +49,7 @@ RegisterNetEvent('police:client:PutInVehicle', function()
                     return
                 end
             end
-		end
+        end
     end
 end)
 
@@ -378,12 +378,12 @@ CreateThread(function()
             DisableControlAction(0, 0x9D2AEA88, true) -- Cover
             DisableControlAction(0, 0xE474F150, true) -- Cover
             DisableControlAction(0, 0xB2F377E8, true) -- Attack
-			DisableControlAction(0, 0xC1989F95, true) -- Attack 2
-			DisableControlAction(0, 0x07CE1E61, true) -- Melee Attack 1
-			DisableControlAction(0, 0xF84FA74F, true) -- MOUSE2
-			DisableControlAction(0, 0xCEE12B50, true) -- MOUSE3
-			DisableControlAction(0, 0x8FFC75D6, true) -- Shift
-			DisableControlAction(0, 0xD9D0E1C0, true) -- SPACE
+            DisableControlAction(0, 0xC1989F95, true) -- Attack 2
+            DisableControlAction(0, 0x07CE1E61, true) -- Melee Attack 1
+            DisableControlAction(0, 0xF84FA74F, true) -- MOUSE2
+            DisableControlAction(0, 0xCEE12B50, true) -- MOUSE3
+            DisableControlAction(0, 0x8FFC75D6, true) -- Shift
+            DisableControlAction(0, 0xD9D0E1C0, true) -- SPACE
             DisableControlAction(0, 0xF3830D8E, true) -- J
             DisableControlAction(0, 0x80F28E95, true) -- L
             DisableControlAction(0, 0xDB096B85, true) -- CTRL
