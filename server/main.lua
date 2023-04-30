@@ -320,6 +320,24 @@ RSGCore.Functions.CreateCallback('police:server:IsPoliceForcePresent', function(
     cb(retval)
 end)
 
+RSGCore.Functions.CreateCallback('police:server:GetSuspectHorse', function(source, cb, id)
+    local Player = RSGCore.Functions.GetPlayer(id)
+
+    if not Player then return end
+
+    local citizenid = Player.PlayerData.citizenid
+
+    local result = MySQL.query.await('SELECT * FROM player_horses WHERE citizenid=@citizenid AND active=@active',
+    {
+        citizenid = citizenid,
+        active = 1
+    })
+
+    if not result[1] then return end
+
+    cb(result[1])
+end)
+
 -- Events
 AddEventHandler('onResourceStart', function(resourceName)
     if resourceName == GetCurrentResourceName() then

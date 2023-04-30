@@ -64,6 +64,63 @@ RegisterNetEvent('police:client:SearchPlayer', function()
     end
 end)
 
+RegisterNetEvent('police:client:SearchHorse', function()
+    local player, distance = RSGCore.Functions.GetClosestPlayer()
+
+    if not player or player == -1 or distance >= 2.5 then
+        RSGCore.Functions.Notify(Lang:t("error.none_nearby"), 'error')
+
+        return
+    end
+
+    local playerId = GetPlayerServerId(player)
+
+    RSGCore.Functions.TriggerCallback('police:server:GetSuspectHorse', function(data)
+        local horsestash = data.name..' '..data.horseid
+        local horsemodel = GetHashKey(data.horse)
+        local invWeight = 15000
+        local invSlots = 20
+
+        local ped = PlayerPedId()
+        local coords = GetEntityCoords(ped)
+        local PlayerPeds = {}
+
+        if not next(PlayerPeds) then
+            local players = GetActivePlayers()
+            for i = 1, #players do
+                local list = players[i]
+                local peds = GetPlayerPed(list)
+
+                if peds then
+                    PlayerPeds[#PlayerPeds + 1] = peds
+                end
+            end
+        end
+
+        local closestPed, closestDistance = RSGCore.Functions.GetClosestPed(coords, PlayerPeds)
+
+        if not closestPed or closestPed == -1 or closestDistance >= 2.5 then
+            RSGCore.Functions.Notify(Lang:t("error.nohorse_nearby"), 'error')
+
+            return
+        end
+
+        local model = GetEntityModel(closestPed)
+
+        if horsemodel ~= model then
+            RSGCore.Functions.Notify(Lang:t("error.invalid_horse"), 'error')
+
+            return
+        end
+
+        TriggerServerEvent("inventory:server:OpenInventory", "stash", horsestash, {maxweight = invWeight, slots = invSlots})
+        TriggerEvent("inventory:client:SetCurrentStash", horsestash)
+        TriggerServerEvent("police:server:SearchPlayer", playerId)
+
+        PlayerPeds = {}
+    end, playerId)
+end)
+
 RegisterNetEvent('police:client:SeizeCash', function()
     local player, distance = RSGCore.Functions.GetClosestPlayer()
     if player ~= -1 and distance < 2.5 then
