@@ -185,14 +185,25 @@ RegisterNetEvent('police:client:JailPlayer', function()
     local player, distance = RSGCore.Functions.GetClosestPlayer()
     if player ~= -1 and distance < 2.5 then
         local playerId = GetPlayerServerId(player)
-        local dialogInput = LocalInput(Lang:t('info.jail_time_input'), 11)
-        if tonumber(dialogInput) > 0 then
-            TriggerServerEvent("police:server:JailPlayer", playerId, tonumber(dialogInput))
+        local dialog = exports['rsg-input']:ShowInput({
+            header = Lang:t('info.jail_time_input'),
+            submitText = Lang:t('info.submit'),
+            inputs = {
+                {
+                    text = Lang:t('info.time_months'),
+                    name = "jailtime",
+                    type = "number",
+                    isRequired = true
+                }
+            }
+        })
+        if tonumber(dialog['jailtime']) > 0 then
+            TriggerServerEvent("police:server:JailPlayer", playerId, tonumber(dialog['jailtime']))
         else
-            RSGCore.Functions.Notify(Lang:t("error.time_higher"), 'error')
+            RSGCore.Functions.Notify(Lang:t("error.time_higher"), "error")
         end
     else
-        RSGCore.Functions.Notify(Lang:t("error.none_nearby"), 'error')
+        RSGCore.Functions.Notify(Lang:t("error.none_nearby"), "error")
     end
 end)
 
@@ -284,7 +295,7 @@ RegisterNetEvent('police:client:CuffPlayer', function()
     if not IsPedRagdoll(PlayerPedId()) then
         local player, distance = RSGCore.Functions.GetClosestPlayer()
         if player ~= -1 and distance < 1.5 then
-            RSGCore.Functions.TriggerCallback('RSGCore:HasItem', function(result)
+            local result = RSGCore.Functions.HasItem(Config.HandCuffItem)
                 if result then
                     local playerId = GetPlayerServerId(player)
                     if not IsPedInAnyVehicle(GetPlayerPed(player)) and not IsPedInAnyVehicle(PlayerPedId()) then
@@ -296,7 +307,6 @@ RegisterNetEvent('police:client:CuffPlayer', function()
                 else
                     RSGCore.Functions.Notify(Lang:t("error.no_cuff"), 'error')
                 end
-            end, Config.HandCuffItem)
         else
             RSGCore.Functions.Notify(Lang:t("error.none_nearby"), 'error')
         end

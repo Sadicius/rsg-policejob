@@ -7,20 +7,6 @@ local PlayerJob = {}
 local onDuty = false
 
 -- Functions
--- local function DrawText3D(x, y, z, text)
---     SetTextScale(0.35, 0.35)
---     SetTextFont(4)
---     SetTextProportional(1)
---     SetTextColour(255, 255, 255, 215)
---     SetTextEntry("STRING")
---     SetTextCentre(true)
---     AddTextComponentString(text)
---     SetDrawOrigin(x,y,z, 0)
---     DrawText(0.0, 0.0)
---     local factor = (string.len(text)) / 370
---     DrawRect(0.0, 0.0+0.0125, 0.017+ factor, 0.03, 0, 0, 0, 75)
---     ClearDrawOrigin()
--- end
 
 local function DrawText3D(x, y, z, text)
     local onScreen,_x,_y=GetScreenCoordFromWorldCoord(x, y, z)
@@ -145,15 +131,6 @@ local function GetClosestPlayer() -- interactions, job, tracker
     return closestPlayer, closestDistance
 end
 
-local function IsArmoryWhitelist() -- being removed
-    local retval = false
-
-    if RSGCore.Functions.GetPlayerData().job.name == 'police' then
-        retval = true
-    end
-    return retval
-end
-
 local function SetWeaponSeries()
     for k, v in pairs(Config.Items.items) do
         if k < 6 then
@@ -176,23 +153,20 @@ RegisterNetEvent('police:client:promptVehicle', function(k)
                 currentGarage = k
             end
         else
-            RSGCore.Functions.Notify(Lang:t('error.not_lawyer'), 'error')
+            RSGCore.Functions.Notify(Lang:t('error.on_duty_police_only'), 'error')
         end
     end)
 end)
 
 RegisterNetEvent('police:client:ImpoundVehicle', function(fullImpound, price)
     local vehicle = RSGCore.Functions.GetClosestVehicle()
-    local bodyDamage = math.ceil(GetVehicleBodyHealth(vehicle))
-    local engineDamage = math.ceil(GetVehicleEngineHealth(vehicle))
-    local totalFuel = exports['LegacyFuel']:GetFuel(vehicle)
     if vehicle ~= 0 and vehicle then
         local ped = PlayerPedId()
         local pos = GetEntityCoords(ped)
         local vehpos = GetEntityCoords(vehicle)
         if #(pos - vehpos) < 5.0 and not IsPedInAnyVehicle(ped) then
             local plate = RSGCore.Functions.GetPlate(vehicle)
-            TriggerServerEvent("police:server:Impound", plate, fullImpound, price, bodyDamage, engineDamage, totalFuel)
+            TriggerServerEvent("police:server:Impound", plate, fullImpound, price)
             RSGCore.Functions.DeleteVehicle(vehicle)
         end
     end
