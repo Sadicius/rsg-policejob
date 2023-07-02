@@ -109,22 +109,6 @@ RegisterNetEvent('RSGCore:Client:OnJobUpdate', function(JobInfo)
     TriggerServerEvent("police:server:UpdateBlips")
 end)
 
-RegisterNetEvent('police:client:sendBillingMail', function(amount)
-    SetTimeout(math.random(2500, 4000), function()
-        local gender = Lang:t('info.mr')
-        if RSGCore.Functions.GetPlayerData().charinfo.gender == 1 then
-            gender = Lang:t('info.mrs')
-        end
-        local charinfo = RSGCore.Functions.GetPlayerData().charinfo
-        TriggerServerEvent('rsg-phone:server:sendNewMail', {
-            sender = Lang:t('email.sender'),
-            subject = Lang:t('email.subject'),
-            message = Lang:t('email.message', {value = gender, value2 = charinfo.lastname, value3 = amount}),
-            button = {}
-        })
-    end)
-end)
-
 RegisterNetEvent('police:client:UpdateBlips', function(players)
     if Config.ShowBlips then
         if PlayerJob and (PlayerJob.name == 'police' or PlayerJob.name == 'ambulance') and onDuty then

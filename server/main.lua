@@ -83,8 +83,8 @@ local function CreateObjectId()
     end
 end
 
-local function IsVehicleOwned(plate)
-    local result = MySQL.Sync.fetchScalar('SELECT plate FROM player_vehicles WHERE plate = ?', {plate})
+local function IsHorseOwned(horseid)
+    local result = MySQL.Sync.fetchScalar('SELECT plate FROM player_horses WHERE horseid = ?', {horseid})
     return result
 end
 
@@ -167,7 +167,7 @@ RSGCore.Commands.Add("jail", Lang:t("commands.jail_player"), {{name = "id", help
         if time > 0 then
             TriggerClientEvent("police:client:JailCommand", src, playerId, time)
         else
-            TriggerClientEvent('RSGCore:Notify', src, Lang:t('info.jail_time_no'), 'primary')
+            TriggerClientEvent('RSGCore:Notify', src, Lang:t('info.jail_time_no'), 'error')
         end
     else
         TriggerClientEvent('RSGCore:Notify', src, Lang:t("error.on_duty_police_only"), 'error')
@@ -501,10 +501,6 @@ RegisterNetEvent('police:server:RobPlayer', function(playerId)
         TriggerClientEvent('RSGCore:Notify', SearchedPlayer.PlayerData.source, Lang:t("info.cash_robbed", {money = money}), 5000, 0, 'blips', 'blip_radius_search', 'COLOR_WHITE')
         TriggerClientEvent('RSGCore:Notify', Player.PlayerData.source, Lang:t("info.stolen_money", {stolen = money}), 5000, 0, 'blips', 'blip_radius_search', 'COLOR_WHITE')
     end
-end)
-
-RegisterNetEvent('police:server:UpdateBlips', function()
-    -- KEEP FOR REF BUT NOT NEEDED ANYMORE.
 end)
 
 RegisterNetEvent('police:server:spawnObject', function(type)
