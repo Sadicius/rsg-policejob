@@ -1,27 +1,12 @@
+local RSGCore = exports['rsg-core']:GetCoreObject()
+
 -- Variables
 local isEscorting = false
-local RSGCore = exports['rsg-core']:GetCoreObject()
 
 -- Functions
 exports('IsHandcuffed', function()
     return isHandcuffed
 end)
-
-local function loadAnimDict(dict) -- interactions, job,
-    while (not HasAnimDictLoaded(dict)) do
-        RequestAnimDict(dict)
-        Wait(10)
-    end
-end
-
-local function IsTargetDead(playerId)
-    local retval = false
-    RSGCore.Functions.TriggerCallback('police:server:isPlayerDead', function(result)
-        retval = result
-    end, playerId)
-    Wait(100)
-    return retval
-end
 
 -- Events
 RegisterNetEvent('police:client:SetOutVehicle', function()
