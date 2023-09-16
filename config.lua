@@ -61,25 +61,11 @@ Config.Locations = {
 
 Config.AuthorizedVehicles = {
     -- Grade 0
-    [0] = {
-        ["policewagon01x"] = "Police Vagon",
-    },
-    -- Grade 1
-    [1] = {
-        ["policewagon01x"] = "Police Vagon",
-    },
-    -- Grade 2
-    [2] = {
-        ["policewagon01x"] = "Police Vagon",
-    },
-    -- Grade 3
-    [3] = {
-        ["policewagon01x"] = "Police Vagon",
-    },
-    -- Grade 4
-    [4] = {
-        ["policewagon01x"] = "Police Vagon",
-    }
+    [0] = {        ["policewagon01x"] = "Police Vagon",    },
+    [1] = {        ["policewagon01x"] = "Police Vagon",    },
+    [2] = {        ["policewagon01x"] = "Police Vagon",    },
+    [3] = {        ["policewagon01x"] = "Police Vagon",    },
+    [4] = {        ["policewagon01x"] = "Police Vagon",    }
 }
 
 Config.WeaponHashes = {}
@@ -89,63 +75,11 @@ Config.Items = {
     label = "Police Armory",
     slots = 6,
     items = {
-        {
-            name = "weapon_revolver_cattleman",
-            price = 0,
-            amount = 1,
-            info = {
-                serie = "",
-            },
-            type = "weapon",
-            slot = 1,
-            authorizedJobGrades = {0, 1, 2, 3, 4}
-        },
-        {
-            name = "weapon_repeater_winchester",
-            price = 0,
-            amount = 1,
-            info = {
-                serie = "",
-            },
-            type = "weapon",
-            slot = 2,
-            authorizedJobGrades = {0, 1, 2, 3, 4}
-        },
-        {
-            name = "weapon_melee_lantern",
-            price = 0,
-            amount = 1,
-            info = {},
-            type = "weapon",
-            slot = 3,
-            authorizedJobGrades = {0, 1, 2, 3, 4}
-        },
-        {
-            name = "weapon_lasso",
-            price = 0,
-            amount = 1,
-            info = {},
-            type = "item",
-            slot = 4,
-            authorizedJobGrades = {0, 1, 2, 3, 4}
-        },
-        {
-            name = "ammo_revolver",
-            price = 0,
-            amount = 5,
-            info = {},
-            type = "item",
-            slot = 5,
-            authorizedJobGrades = {0, 1, 2, 3, 4}
-        },
-        {
-            name = "ammo_repeater",
-            price = 0,
-            amount = 5,
-            info = {},
-            type = "item",
-            slot = 6,
-            authorizedJobGrades = {0, 1, 2, 3, 4}
-        },
+        {            name = "weapon_revolver_cattleman",    price = 0,  amount = 1, info = {    serie = "", },      type = "weapon",    slot = 1,   authorizedJobGrades = {0, 1, 2, 3, 4}        },
+        {            name = "weapon_repeater_winchester",   price = 0,  amount = 1, info = {    serie = "", },      type = "weapon",    slot = 2,   authorizedJobGrades = {0, 1, 2, 3, 4}        },
+        {            name = "weapon_melee_lantern",         price = 0,  amount = 1, info = {},  type = "weapon",    slot = 3,   authorizedJobGrades = {0, 1, 2, 3, 4}        },
+        {            name = "weapon_lasso",                 price = 0,  amount = 1, info = {},  type = "item",      slot = 4,   authorizedJobGrades = {0, 1, 2, 3, 4}        },
+        {            name = "ammo_revolver",                price = 0,  amount = 5, info = {},  type = "item",      slot = 5,   authorizedJobGrades = {0, 1, 2, 3, 4}        },
+        {            name = "ammo_repeater",                price = 0,  amount = 5, info = {},  type = "item",      slot = 6,   authorizedJobGrades = {0, 1, 2, 3, 4}        },
     }
 }
